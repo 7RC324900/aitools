@@ -20,11 +20,15 @@ TOOLS = ns["TOOLS"]
 mkarticle = ns["mkarticle"]
 
 
-def mkpage(title, desc, body, canonical, is_article=False):
-    css = "../" if is_article else ""
-    home = "../" if is_article else "."
-    arts = "../articles/" if is_article else "articles/"
-    js = "../" if is_article else ""
+def mkpage(title, desc, body, canonical, is_article=False, css=None, home=None, arts=None, js=None):
+    if css is None:
+        css = "../" if is_article else ""
+    if home is None:
+        home = "../" if is_article else "."
+    if arts is None:
+        arts = "../articles/" if is_article else "articles/"
+    if js is None:
+        js = "../" if is_article else ""
     schema = ""
     if is_article:
         schema = '<script type="application/ld+json">\n{"@context":"https://schema.org","@type":"Article","headline":"' + title + '","datePublished":"2026-01-15"}\n</script>\n'
@@ -78,7 +82,7 @@ function filterArticles(q){{q=q.toLowerCase().trim();document.querySelectorAll('
 document.addEventListener('DOMContentLoaded',function(){{var e=document.getElementById('search-input');if(e)e.addEventListener('input',function(){{filterArticles(this.value)}})}});
 </script>'''
     with open(os.path.join(ARTICLES_DIR, "index.html"), 'w', encoding='utf-8') as f:
-        f.write(mkpage("\u5168\u90e8AI\u5de5\u5177\u8bc4\u6d4b - AI\u5de5\u5177\u5bfc\u822a", "\u6d4f\u89c8100\u6b3eAI\u5de5\u5177\u6df1\u5ea6\u8bc4\u6d4b", body, SITE_URL + "/" + ARTICLES_DIR + "/"))
+        f.write(mkpage("\u5168\u90e8AI\u5de5\u5177\u8bc4\u6d4b - AI\u5de5\u5177\u5bfc\u822a", "\u6d4f\u89c8100\u6b3eAI\u5de5\u5177\u6df1\u5ea6\u8bc4\u6d4b", body, SITE_URL + "/" + ARTICLES_DIR + "/", is_article=False, css="../", home="..", arts="articles/", js="../"))
     print("  ok articles/index.html")
     
     # Generate main index
