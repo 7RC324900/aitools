@@ -1,0 +1,14 @@
+*.pyc
+__pycache__/
+.DS_Store
+generate_articles.py
+.env
+venv/
+*.pyc
+__pycache__/
+.DS_Store
+generate_articles.py
+.env
+venv/
+_fix_*
+debug_analysis.png
